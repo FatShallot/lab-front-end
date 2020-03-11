@@ -56,24 +56,17 @@ export default {
       this.$refs.loginFormRef.resetFields()
     },
     login () {
-      // 通过表单实例的validate()方法进行表单数据合法性验证
-      // async await这两个关键字一起使用，用于处理异步请求返回的promise对象
-      this.$refs.loginFormRef.validate(async valid => {
+      // 对表单数据的有效性进行验证
+      this.$refs.loginFormRef.validate(valid => {
         if (!valid) return
-        const res = await this.$http.post('login', this.systemUser)
-        // 如果返回的状态码（响应里的status字段）不是200，Vue就直接抛异常了
-        const token = res.headers.authorization
-
-        if (res.data.code !== 2000) {
-          return this.$message.error(res.data.msg)
-        } else {
-          this.$message.success(res.data.msg)
+        // 表单数据有效,发送请求
+        this.$http.post('login', this.systemUser).then((response) => {
+          this.$message.success(response.data.msg)
           // 将token保存在axios中
-          this.$http.defaults.headers.common.Authorization = token
-
-          // 跳转到主页
-          this.router.push('/home')
-        }
+          this.$http.defaults.headers.common.Authorization = response.headers.authorization
+        }).catch((error) => {
+          this.$message.error(error.response.data.msg)
+        })
       })
     }
   }
