@@ -5,15 +5,28 @@
       <!-- :model绑定了表单与数据 -->
       <!-- :rules将自定义的校验规则与表单进行了绑定 -->
       <!-- ref属性定义了这个表单的实例对象，通过this.$refs.对象名获取 -->
-      <el-form ref="loginFormRef" :model="systemUser" :rules="loginFormRules" label-width="0px" class="login_form">
+      <el-form
+        ref="loginFormRef"
+        :model="systemUser"
+        :rules="loginFormRules"
+        label-width="0px"
+        class="login_form"
+      >
         <!-- 用户名 -->
         <!-- prop属性将验证规则和表单数据项进行绑定 -->
         <el-form-item prop="username">
-          <el-input v-model="systemUser.username" prefix-icon="el-icon-user"></el-input>
+          <el-input
+            v-model="systemUser.username"
+            prefix-icon="el-icon-user"
+          ></el-input>
         </el-form-item>
         <!-- 密码 -->
         <el-form-item prop="password">
-          <el-input v-model="systemUser.password" prefix-icon="el-icon-lock" type="password"></el-input>
+          <el-input
+            v-model="systemUser.password"
+            prefix-icon="el-icon-lock"
+            type="password"
+          ></el-input>
         </el-form-item>
         <!-- 按钮区域 -->
         <el-form-item class="btns">
@@ -27,7 +40,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       // 这是登录表单的数据绑定对象
       systemUser: {
@@ -51,31 +64,21 @@ export default {
   },
   methods: {
     // 点击重置按钮，重置登录表单
-    reset () {
+    reset() {
       // 通过this.$refs.对象名 获取到了表单实例对象，并调用resetFields()方法，清空了表单
       this.$refs.loginFormRef.resetFields()
     },
-    login () {
+    login() {
       // 对表单数据的有效性进行验证
-      this.$refs.loginFormRef.validate(valid => {
+      this.$refs.loginFormRef.validate(async valid => {
         if (!valid) return
         // 表单数据有效,发送请求
-        // 得到的是一个Promise对象
-        this.$request.post('login', this.systemUser).then(data => {
-          if (data != null) {
-            if (data.token) {
-              this.$request.saveToken(data.token)
-            }
-            this.$request.get('menus').then(menus => {
-              console.log('获取到返回值')
-              if (menus != null) {
-                console.log(menus)
-              } else {
-                console.log('没有获取到数据')
-              }
-            })
-          }
-        })
+        const data = await this.$request.post('login', this.systemUser)
+        if (data) {
+          this.$request.saveToken(data.token)
+          const menus = await this.$request.get('menus')
+          console.log(menus)
+        }
       })
     }
   }
