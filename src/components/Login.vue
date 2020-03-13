@@ -31,15 +31,15 @@ export default {
     return {
       // 这是登录表单的数据绑定对象
       systemUser: {
-        username: '',
-        password: ''
+        username: '10010',
+        password: 'administrator'
       },
       // 这是表单的验证规则对象
       loginFormRules: {
         // 验证用户名是否合法
         username: [
           { required: true, message: '请输入登录名称', trigger: 'blur' },
-          { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+          { min: 3, max: 13, message: '长度在 3 到 13 个字符', trigger: 'blur' }
         ],
         // 验证密码是否合法
         password: [
@@ -60,12 +60,21 @@ export default {
       this.$refs.loginFormRef.validate(valid => {
         if (!valid) return
         // 表单数据有效,发送请求
-        this.$http.post('login', this.systemUser).then((response) => {
-          this.$message.success(response.data.msg)
-          // 将token保存在axios中
-          this.$http.defaults.headers.common.Authorization = response.headers.authorization
-        }).catch((error) => {
-          this.$message.error(error.response.data.msg)
+        // 得到的是一个Promise对象
+        this.$request.post('login', this.systemUser).then(data => {
+          if (data != null) {
+            if (data.token) {
+              this.$request.saveToken(data.token)
+            }
+            this.$request.get('menus').then(menus => {
+              console.log('获取到返回值')
+              if (menus != null) {
+                console.log(menus)
+              } else {
+                console.log('没有获取到数据')
+              }
+            })
+          }
         })
       })
     }
