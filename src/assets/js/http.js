@@ -10,6 +10,8 @@ axios.defaults.baseURL = 'http://localhost:10010/'
 // axios.defaults.transformRequest = data => qs.stringify(data)
 
 // 响应拦截器
+// 正常消息：response里有status和data，data里有后端返回的自定义数据，数据里有code、msg、data
+// 异常消息：error里有response
 axios.interceptors.response.use(
   response => {
     // 如果返回的自定义状态码为2000，说明接口请求成功，可以正常拿到数据
@@ -24,17 +26,23 @@ axios.interceptors.response.use(
     } else {
       // 存在异常
       Vue.prototype.$message.error(response.data.msg)
-      // 向后面的处理返回一个null
-      return null
+      // 向后面的处理返回一个data
+      return response.data
     }
   },
   error => {
     // 我们可以在这里对异常状态作统一处理
+    // 这里的处理逻辑还要再修改
     const { response } = error
     if (response) {
       // 如果服务器返回结果了
       // 提示错误信息
-      Vue.prototype.$message.error(response.data.msg)
+      Vue.prototype.$message.error(response)
+      if (response.data.msg) {
+        Vue.prototype.$message.error(response.data.msg)
+      } else {
+        Vue.prototype.$message.error(response.message)
+      }
       // 这里可以进一步判断响应状态码，做相应的处理
     } else {
       // 如果服务器没有返回结果
@@ -43,8 +51,8 @@ axios.interceptors.response.use(
         Vue.prototype.$message.error(response.data.msg)
       }
     }
-    // 向后面的处理返回一个null
-    return null
+    // 向后面的处理返回一个data
+    return response.data
   }
 )
 

@@ -7,7 +7,7 @@
       <!-- ref属性定义了这个表单的实例对象，通过this.$refs.对象名获取 -->
       <el-form
         ref="loginFormRef"
-        :model="systemUser"
+        :model="loginForm"
         :rules="loginFormRules"
         label-width="0px"
         class="login_form"
@@ -16,14 +16,14 @@
         <!-- prop属性将验证规则和表单数据项进行绑定 -->
         <el-form-item prop="username">
           <el-input
-            v-model="systemUser.username"
+            v-model="loginForm.username"
             prefix-icon="el-icon-user"
           ></el-input>
         </el-form-item>
         <!-- 密码 -->
         <el-form-item prop="password">
           <el-input
-            v-model="systemUser.password"
+            v-model="loginForm.password"
             prefix-icon="el-icon-lock"
             type="password"
           ></el-input>
@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       // 这是登录表单的数据绑定对象
-      systemUser: {
+      loginForm: {
         username: '10010',
         password: 'administrator'
       },
@@ -73,7 +73,7 @@ export default {
       this.$refs.loginFormRef.validate(async valid => {
         if (!valid) return
         // 表单数据有效,发送请求
-        const data = await this.$request.post('login', this.systemUser)
+        const data = await this.$request.post('login', this.loginForm)
         if (data) {
           this.$request.saveToken(data.token)
           const menus = await this.$request.get('menus')

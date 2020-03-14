@@ -1,6 +1,10 @@
 // 导入axios
 import axios from './http'
-// import qs from 'qs'
+
+// .then()里的参数data，已经经过了响应过滤器的拦截，实际上等于response.data
+// .catch()里的参数data，已经经过了响应过滤器的拦截，实际上等于error.response.data
+// 参数data里是后端自定义的数据，格式是code、msg、data
+// resolve()和reject()里写data还是data.data结果是一样的
 
 // 封装了一个get请求的方法
 function get(url, params) {
@@ -9,11 +13,11 @@ function get(url, params) {
       .get(url, {
         params
       })
-      .then(result => {
-        resolve(result.data)
+      .then(data => {
+        resolve(data)
       })
-      .catch(err => {
-        reject(err)
+      .catch(data => {
+        reject(data)
       })
   })
 }
@@ -25,11 +29,11 @@ function post(url, params) {
   return new Promise((resolve, reject) => {
     axios
       .post(url, params)
-      .then(result => {
-        resolve(result)
+      .then(data => {
+        resolve(data)
       })
-      .catch(error => {
-        reject(error)
+      .catch(data => {
+        reject(data)
       })
   })
 }
