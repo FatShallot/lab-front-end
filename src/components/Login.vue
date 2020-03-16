@@ -73,11 +73,14 @@ export default {
       this.$refs.loginFormRef.validate(async valid => {
         if (!valid) return
         // 表单数据有效,发送请求
+        // const data = await this.$request.post('login', this.loginForm)
+        // if (data) {
+        //   this.$request.saveToken(data.token)
+        // }
         const data = await this.$request.post('login', this.loginForm)
-        if (data) {
+        if (data.isSuccessful) {
           this.$request.saveToken(data.token)
-          const menus = await this.$request.get('menus')
-          console.log(menus)
+          this.$router.push('/home')
         }
       })
     }
