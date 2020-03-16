@@ -38,19 +38,7 @@ function post(url, params) {
   })
 }
 
-// 保存token
-function saveToken(token) {
-  axios.defaults.headers.common.Authorization = token
-}
-
-// 清除保存的token
-function clearToken() {
-  axios.defaults.headers.common.Authorization = ''
-}
-
 export default {
-  saveToken,
-  clearToken,
   get,
   post
 }

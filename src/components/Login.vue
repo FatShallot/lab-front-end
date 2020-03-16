@@ -78,8 +78,9 @@ export default {
         //   this.$request.saveToken(data.token)
         // }
         const data = await this.$request.post('login', this.loginForm)
-        if (data.isSuccessful) {
-          this.$request.saveToken(data.token)
+        if (data.successful) {
+          // 将token保存到session里
+          window.sessionStorage.setItem('jwt', data.token)
           this.$router.push('/home')
         }
       })

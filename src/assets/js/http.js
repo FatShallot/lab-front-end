@@ -9,13 +9,19 @@ axios.defaults.baseURL = 'http://localhost:10010/'
 // 把请求参数变成一个对象
 // axios.defaults.transformRequest = data => qs.stringify(data)
 
+// 请求拦截器
+axios.interceptors.request.use(request => {
+  request.headers.Authorization = window.sessionStorage.getItem('jwt')
+  return request
+})
+
 // 响应拦截器
 // 正常消息：response里有status和data，data里有后端返回的自定义数据，数据里有code、msg、data、isSuccessful
 // 异常消息：error里有response
 axios.interceptors.response.use(
   response => {
     // 正常状态
-    if (response.data.isSuccessful) {
+    if (response.data.successful) {
       // 如果响应里携带了token，就将这个token保存到要向后传递的数据中
       if (response.headers.authorization) {
         response.data.token = response.headers.authorization
