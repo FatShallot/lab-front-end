@@ -3,7 +3,17 @@
     <!-- 头部 -->
     <el-header>
       <span>实验室管理系统</span>
-      <el-button type="info" plain @click="logout">退出登录</el-button>
+      <!-- <el-button type="info" plain @click="logout">退出登录</el-button> -->
+      <!-- <div class="systemOperation" @click="logout">···</div> -->
+      <el-dropdown @command="handleCommand">
+        <span class="el-dropdown-link">
+          ●●●
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="password">修改密码</el-dropdown-item>
+          <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </el-header>
 
     <!-- 身体 -->
@@ -69,7 +79,19 @@ export default {
     return {
       menus: [],
       // 侧边栏是否折叠，默认不折叠
-      isCollapse: false
+      isCollapse: false,
+      // 右上角系统设置的选项
+      options: [
+        {
+          value: '1',
+          label: '修改密码'
+        },
+        {
+          value: '2',
+          label: '退出登录'
+        }
+      ],
+      value: ''
     }
   },
   created() {
@@ -91,6 +113,14 @@ export default {
     // 折叠侧边栏
     collapse() {
       this.isCollapse = !this.isCollapse
+    },
+    handleCommand(command) {
+      if (command === 'password') {
+        alert(command)
+      }
+      if (command === 'logout') {
+        this.logout()
+      }
     }
   }
 }
@@ -139,6 +169,15 @@ export default {
   color: #fff;
   text-align: center;
   letter-spacing: 0.2em;
+  cursor: pointer;
+}
+
+.el-dropdown-link {
+  font-size: 8px;
+  line-height: 24px;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 0.3em;
   cursor: pointer;
 }
 </style>
