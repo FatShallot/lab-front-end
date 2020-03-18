@@ -45,7 +45,7 @@ export default {
       // 这是登录表单的数据绑定对象
       loginForm: {
         username: '10010',
-        password: 'administrator'
+        password: '123456'
       },
       // 这是表单的验证规则对象
       loginFormRules: {
@@ -73,11 +73,7 @@ export default {
       this.$refs.loginFormRef.validate(async valid => {
         if (!valid) return
         // 表单数据有效,发送请求
-        // const data = await this.$request.post('login', this.loginForm)
-        // if (data) {
-        //   this.$request.saveToken(data.token)
-        // }
-        const data = await this.$request.post('login', this.loginForm)
+        const data = await this.$request.postWithBody('login', this.loginForm)
         if (data.successful) {
           // 将token保存到session里
           window.sessionStorage.setItem('jwt', data.token)

@@ -79,19 +79,7 @@ export default {
     return {
       menus: [],
       // 侧边栏是否折叠，默认不折叠
-      isCollapse: false,
-      // 右上角系统设置的选项
-      options: [
-        {
-          value: '1',
-          label: '修改密码'
-        },
-        {
-          value: '2',
-          label: '退出登录'
-        }
-      ],
-      value: ''
+      isCollapse: false
     }
   },
   created() {
@@ -114,9 +102,10 @@ export default {
     collapse() {
       this.isCollapse = !this.isCollapse
     },
+    // 页面右上角的下拉菜单
     handleCommand(command) {
       if (command === 'password') {
-        alert(command)
+        this.$router.push('/password')
       }
       if (command === 'logout') {
         this.logout()

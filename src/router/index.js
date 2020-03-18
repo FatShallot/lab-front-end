@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import Login from '../components/Login.vue'
 import Home from '../components/Home.vue'
 import Welcome from '../components/Welcome.vue'
+import Password from '../components/Password.vue'
 
 Vue.use(VueRouter)
 
@@ -26,6 +27,10 @@ const routes = [
       {
         path: '/welcome',
         component: Welcome
+      },
+      {
+        path: '/password',
+        component: Password
       }
     ]
   }

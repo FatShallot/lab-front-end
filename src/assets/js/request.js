@@ -1,5 +1,6 @@
 // 导入axios
 import axios from './http'
+import qs from 'qs'
 
 // .then()里的参数data，已经经过了响应过滤器的拦截，实际上等于response.data
 // .catch()里的参数data，已经经过了响应过滤器的拦截，实际上等于error.response.data
@@ -23,9 +24,7 @@ function get(url, params) {
 }
 
 // 封装了一个post请求的方法
-function post(url, params) {
-  // 请求体
-  params.body = JSON.stringify(params.body)
+function postWithBody(url, params) {
   return new Promise((resolve, reject) => {
     axios
       .post(url, params)
@@ -38,7 +37,37 @@ function post(url, params) {
   })
 }
 
+function postWithParam(url, params) {
+  params = qs.stringify(params)
+  return new Promise((resolve, reject) => {
+    axios
+      .post(url, params)
+      .then(data => {
+        resolve(data)
+      })
+      .catch(data => {
+        reject(data)
+      })
+  })
+}
+
+function putWithParam(url, params) {
+  params = qs.stringify(params)
+  return new Promise((resolve, reject) => {
+    axios
+      .put(url, params)
+      .then(data => {
+        resolve(data)
+      })
+      .catch(data => {
+        reject(data)
+      })
+  })
+}
+
 export default {
   get,
-  post
+  postWithBody,
+  postWithParam,
+  putWithParam
 }

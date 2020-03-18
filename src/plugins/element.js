@@ -14,7 +14,8 @@ import {
   MenuItem,
   Dropdown,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  Card
 } from 'element-ui'
 
 Vue.use(Button)
@@ -31,5 +32,6 @@ Vue.use(MenuItem)
 Vue.use(Dropdown)
 Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
+Vue.use(Card)
 // 将Message挂载到vue原型上
 Vue.prototype.$message = Message
