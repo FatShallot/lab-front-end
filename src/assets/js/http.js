@@ -6,8 +6,6 @@ import axios from 'axios'
 // 设置请求的根路径，就是后台路径
 // 这里最后加了一个/，调用的时候，直接写login，而不用写/login
 axios.defaults.baseURL = 'http://localhost:10010/'
-// 把请求参数变成一个对象
-// axios.defaults.transformRequest = data => qs.stringify(data)
 
 // 请求拦截器
 axios.interceptors.request.use(request => {

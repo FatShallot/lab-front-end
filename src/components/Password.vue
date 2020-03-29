@@ -1,5 +1,10 @@
 <template>
-  <div class="container">
+  <div>
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>修改密码</el-breadcrumb-item>
+    </el-breadcrumb>
+
     <el-card class="box-card">
       <el-form :rules="rules" :model="form" ref="formRef">
         <el-form-item>
@@ -76,7 +81,7 @@ export default {
     submit() {
       this.$refs.formRef.validate(async valid => {
         if (!valid) return
-        const response = await this.$request.putWithParam('password', {
+        const response = await this.$request.putWithParam('user/password', {
           oldPassword: this.form.oldPassword,
           newPassword: this.form.newPassword
         })
@@ -94,5 +99,9 @@ export default {
 <style lang="less" scoped>
 .el-form-item {
   width: 50%;
+}
+
+.el-card {
+  margin-top: 10px;
 }
 </style>

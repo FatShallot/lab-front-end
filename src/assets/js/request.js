@@ -11,9 +11,7 @@ import qs from 'qs'
 function get(url, params) {
   return new Promise((resolve, reject) => {
     axios
-      .get(url, {
-        params
-      })
+      .get(url, { params })
       .then(data => {
         resolve(data)
       })
@@ -65,9 +63,39 @@ function putWithParam(url, params) {
   })
 }
 
+function putWithBody(url, params) {
+  return new Promise((resolve, reject) => {
+    axios
+      .put(url, params)
+      .then(data => {
+        resolve(data)
+      })
+      .catch(data => {
+        reject(data)
+      })
+  })
+}
+
+function deleteWithParam(url, params) {
+  return new Promise((resolve, reject) => {
+    axios
+      .delete(url, {
+        params
+      })
+      .then(data => {
+        resolve(data)
+      })
+      .catch(data => {
+        reject(data)
+      })
+  })
+}
+
 export default {
   get,
   postWithBody,
   postWithParam,
-  putWithParam
+  putWithParam,
+  putWithBody,
+  deleteWithParam
 }

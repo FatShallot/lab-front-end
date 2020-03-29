@@ -15,7 +15,18 @@ import {
   Dropdown,
   DropdownMenu,
   DropdownItem,
-  Card
+  Card,
+  Breadcrumb,
+  BreadcrumbItem,
+  Table,
+  TableColumn,
+  Pagination,
+  MessageBox,
+  Row,
+  Col,
+  Dialog,
+  Select,
+  Option
 } from 'element-ui'
 
 Vue.use(Button)
@@ -33,5 +44,16 @@ Vue.use(Dropdown)
 Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
 Vue.use(Card)
+Vue.use(Breadcrumb)
+Vue.use(BreadcrumbItem)
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(Pagination)
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Dialog)
+Vue.use(Select)
+Vue.use(Option)
 // 将Message挂载到vue原型上
 Vue.prototype.$message = Message
+Vue.prototype.$confirm = MessageBox.confirm

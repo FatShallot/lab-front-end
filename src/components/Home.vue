@@ -7,8 +7,9 @@
       <!-- <div class="systemOperation" @click="logout">···</div> -->
       <el-dropdown @command="handleCommand">
         <span class="el-dropdown-link">
-          ●●●
-        </span>
+          用户：{{ userRealName }}
+          <i class="el-icon-arrow-down el-icon--right"></i
+        ></span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="password">修改密码</el-dropdown-item>
           <el-dropdown-item command="logout">退出登录</el-dropdown-item>
@@ -28,6 +29,7 @@
           active-text-color="#409EFF"
           :collapse="isCollapse"
           :collapse-transition="false"
+          router
         >
           <!-- 一级菜单 -->
           <!-- 循环 -->
@@ -50,7 +52,7 @@
             <el-menu-item
               v-for="childItem in item.childMenus"
               :key="childItem.id"
-              :index="childItem.id + ''"
+              :index="'/' + childItem.path"
             >
               <!-- 模板 -->
               <template slot="title">
@@ -77,13 +79,17 @@
 export default {
   data() {
     return {
+      // 菜单
       menus: [],
       // 侧边栏是否折叠，默认不折叠
-      isCollapse: false
+      isCollapse: false,
+      // 用户真实姓名
+      userRealName: ''
     }
   },
   created() {
     this.getMenus()
+    this.getUserRealName()
   },
   methods: {
     logout() {
@@ -109,6 +115,12 @@ export default {
       }
       if (command === 'logout') {
         this.logout()
+      }
+    },
+    async getUserRealName() {
+      const response = await this.$request.get('user/real_name')
+      if (response.successful) {
+        this.userRealName = response.data
       }
     }
   }
@@ -166,7 +178,8 @@ export default {
   line-height: 24px;
   color: #fff;
   text-align: center;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.2em;
   cursor: pointer;
+  font-size: 16px;
 }
 </style>

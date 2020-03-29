@@ -12,12 +12,13 @@
         label-width="0px"
         class="login_form"
       >
-        <!-- 用户名 -->
+        <!-- 账号 -->
         <!-- prop属性将验证规则和表单数据项进行绑定 -->
         <el-form-item prop="username">
           <el-input
             v-model="loginForm.username"
             prefix-icon="el-icon-user"
+            oninput="value=value.replace(/[^\d]/g,'')"
           ></el-input>
         </el-form-item>
         <!-- 密码 -->

@@ -40,7 +40,15 @@
 # 界面
 ## 备份
 如果GitHub无法显示，可以到[实验室管理系统界面](http://47.100.44.201:8000/2020/03/17/%e5%ae%9e%e9%aa%8c%e5%ae%a4%e7%ae%a1%e7%90%86%e7%b3%bb%e7%bb%9f%e7%95%8c%e9%9d%a2/)查看
+
 ## 登录界面
+
 ![Login.png](http://ww1.sinaimg.cn/large/005IGVTXly1gcvu5vx3gzj31hc0smjt1.jpg)
+
 ## 主界面
-![Home.png](http://ww1.sinaimg.cn/large/005IGVTXly1gcwt04qmdsj31hc0smq51.jpg)
+
+![Home.png](http://ww1.sinaimg.cn/large/005IGVTXly1gd9ib3iu7pj31hc0smgn7.jpg)
+
+# 用户账户界面
+
+![User.png](http://ww1.sinaimg.cn/large/005IGVTXly1gdaklamtasj31hc0smq5i.jpg)
