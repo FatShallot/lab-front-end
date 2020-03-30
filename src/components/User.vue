@@ -101,7 +101,7 @@
         <el-form-item label="角色">
           <!-- 表示选中的值 -->
           <el-select
-            v-model="changeRoleForm.role"
+            v-model="changeRoleForm.roleId"
             placeholder="请选择用户角色"
             style="width:100%"
           >
@@ -149,10 +149,10 @@
             style="width:100%"
           ></el-input>
         </el-form-item>
-        <el-form-item label="角色" prop="role">
+        <el-form-item label="角色" prop="roleId">
           <!-- 表示选中的值 -->
           <el-select
-            v-model="addUserForm.role"
+            v-model="addUserForm.roleId"
             placeholder="请选择用户角色"
             style="width:100%"
           >
@@ -195,7 +195,7 @@ export default {
       changeRoleForm: {
         username: '',
         realName: '',
-        role: ''
+        roleId: ''
       },
       // form里各元素标签的宽度
       formLabelWidth: '20%',
@@ -205,7 +205,7 @@ export default {
       addUserForm: {
         username: '',
         realName: '',
-        role: ''
+        roleId: ''
       },
       // 添加用户对话框表单的校验规则
       addUserFormRules: {
@@ -214,7 +214,8 @@ export default {
           { min: 3, max: 13, message: '长度在 3 到 13 个字符', trigger: 'blur' }
         ],
         realName: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
-        role: [{ required: true, message: '请选择角色', trigger: 'change' }]
+        // 这个地方居然一定要跟字段命名得一样。如果用role，在选了选项以后也会又错误提示
+        roleId: [{ required: true, message: '请选择角色', trigger: 'change' }]
       }
     }
   },
@@ -223,6 +224,7 @@ export default {
     this.getRoles()
   },
   methods: {
+    // 获取所有用户
     async getUsers() {
       const reponse = await this.$request.get('users', this.queryInfo)
       if (reponse.successful) {
@@ -312,7 +314,7 @@ export default {
     showChangeRoleDialog(user) {
       this.isChangeRoleDialogVisable = true
       // 每次打开对话框都将当前的角色赋值上去
-      this.changeRoleForm.role = user.roleId
+      this.changeRoleForm.roleId = user.roleId
       this.changeRoleForm.realName = user.realName
       this.changeRoleForm.username = user.username
     },
