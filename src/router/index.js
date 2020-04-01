@@ -7,6 +7,8 @@ import Home from '../components/Home.vue'
 import Welcome from '../components/Welcome.vue'
 import Password from '../components/Password.vue'
 import User from '../components/User.vue'
+import Student from '../components/Student.vue'
+import Status from '../components/Status.vue'
 
 Vue.use(VueRouter)
 
@@ -36,6 +38,14 @@ const routes = [
       {
         path: '/users',
         component: User
+      },
+      {
+        path: '/students',
+        component: Student
+      },
+      {
+        path: '/status',
+        component: Status
       }
     ]
   }

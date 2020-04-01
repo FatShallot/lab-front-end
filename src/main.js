@@ -8,6 +8,11 @@ import './assets/css/global.css'
 import axios from 'axios'
 // 导入封装好的4个请求方法
 import Request from './assets/js/request'
+// 导入自定义的vuex
+import Store from './vuex/store'
+
+// 将自定义的vuex store挂载到原型上
+Vue.prototype.$store = Store
 
 // 设置请求的根路径，就是后台路径
 // 这里最后加了一个/，调用的时候，直接写login，而不用写/login

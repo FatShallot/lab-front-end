@@ -26,7 +26,10 @@ import {
   Col,
   Dialog,
   Select,
-  Option
+  Option,
+  Tag,
+  PageHeader,
+  DatePicker
 } from 'element-ui'
 
 Vue.use(Button)
@@ -54,6 +57,9 @@ Vue.use(Col)
 Vue.use(Dialog)
 Vue.use(Select)
 Vue.use(Option)
+Vue.use(Tag)
+Vue.use(PageHeader)
+Vue.use(DatePicker)
 // 将Message挂载到vue原型上
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm

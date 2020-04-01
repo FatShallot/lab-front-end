@@ -8,16 +8,12 @@
 
     <el-card>
       <!-- 查询输入框 -->
-      <!-- gutter属性给每个el-col之间设置间隔 -->
-      <el-row :gutter="20">
-        <!-- 查询信息 -->
-        <el-col :span="8">
-          <el-input
-            v-model="queryInfo.realName"
-            clearable
-            @clear="getUsers"
-            placeholder="姓名"
-          >
+      <el-form :inline="true">
+        <el-form-item>
+          <div>姓名</div>
+        </el-form-item>
+        <el-form-item>
+          <el-input v-model="queryInfo.realName" clearable @clear="getUsers">
             <!-- slot="append"应该是表示将按钮跟输入框结合在一起，是固定写法 -->
             <el-button
               slot="append"
@@ -26,13 +22,13 @@
               placeholder="请输入内容"
             ></el-button>
           </el-input>
-        </el-col>
-        <el-col :span="2">
+        </el-form-item>
+        <el-form-item>
           <el-button type="primary" plain @click="showAddUserDialog">
             添加用户
           </el-button>
-        </el-col>
-      </el-row>
+        </el-form-item>
+      </el-form>
 
       <!-- 用户表格 -->
       <!-- 增加height属性自动实现固定表头 -->
@@ -349,10 +345,9 @@ export default {
 
 <style lang="less" scoped>
 .el-card {
-  margin-top: 15px;
+  margin-top: 10px;
 }
 .el-table {
-  margin-top: 10px;
   margin-bottom: 10px;
 }
 </style>
