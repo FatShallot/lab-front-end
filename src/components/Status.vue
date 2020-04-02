@@ -52,6 +52,22 @@ export default {
           axisPointer: {
             // 坐标轴指示器，坐标轴触发有效
             type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+          },
+          // 自定义提示信息
+          formatter(data) {
+            let msg = `${data[0].name}`
+            // marker表示一段html，是这个状态的图例
+            data.forEach(item => {
+              // 将小数表示的小时转化为时分秒
+              const duration =
+                Math.trunc(item.data) +
+                '时' +
+                Math.trunc((item.data % 1) * 60) +
+                '分'
+              msg += `<br>${item.marker} ${item.seriesName} ${duration}`
+            })
+            // msg += `<br>${data[0].marker}`
+            return msg
           }
         },
         // 图例
@@ -85,7 +101,21 @@ export default {
         // 数据
         // stack的值相同的列会堆叠在一起
         series: []
-      }
+      },
+      // 给堆叠柱状图用的配色表，这里用的是echarts提供的颜色，需要的话可以自己改
+      colors: [
+        '#c23531',
+        '#2f4554',
+        '#61a0a8',
+        '#d48265',
+        '#91c7ae',
+        '#749f83',
+        '#ca8622',
+        '#bda29a',
+        '#6e7074',
+        '#546570',
+        '#c4ccd3'
+      ]
     }
   },
   created() {
@@ -126,6 +156,10 @@ export default {
           for (let j = 0; j < this.status[i].data.length; j++) {
             this.status[i].data[j] = this.status[i].data[j] / 3600
           }
+          // 自定义颜色
+          this.status[i].itemStyle = {
+            color: this.colors[i % this.colors.length]
+          }
         }
         console.log(this.status)
         // 这里可以引入计算属性
@@ -133,7 +167,7 @@ export default {
         this.option.legend.data = this.status.map(item => item.name)
         // x轴坐标
         this.option.xAxis[0].data = this.status[1].data.map((item, index) => {
-          return index + '日'
+          return index + 1 + '日'
         })
         // 数据
         this.option.series = this.status
