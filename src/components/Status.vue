@@ -29,13 +29,6 @@
 </template>
 
 <script>
-// 导入echarts
-const echarts = require('echarts/lib/echarts')
-require('echarts/lib/chart/line')
-require('echarts/lib/chart/bar')
-require('echarts/lib/component/tooltip')
-require('echarts/lib/component/legend')
-
 export default {
   data() {
     return {
@@ -55,6 +48,7 @@ export default {
           },
           // 自定义提示信息
           formatter(data) {
+            // 通过方法来操作提示信息的改进失败了，暂时放弃
             let msg = `${data[0].name}`
             // marker表示一段html，是这个状态的图例
             data.forEach(item => {
@@ -161,8 +155,6 @@ export default {
             color: this.colors[i % this.colors.length]
           }
         }
-        console.log(this.status)
-        // 这里可以引入计算属性
         // 图例
         this.option.legend.data = this.status.map(item => item.name)
         // x轴坐标
@@ -177,7 +169,7 @@ export default {
     },
     // 初始化堆叠柱状图
     initBarChart() {
-      var barChart = echarts.init(this.$refs.bar)
+      var barChart = this.$echarts.init(this.$refs.bar)
       barChart.setOption(this.option)
     }
   }

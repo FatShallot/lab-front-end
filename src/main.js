@@ -10,6 +10,15 @@ import axios from 'axios'
 import Request from './assets/js/request'
 // 导入自定义的vuex
 import Store from './vuex/store'
+// 导入echarts，及需要用到的组件
+import ECharts from 'echarts/lib/echarts'
+import 'echarts/lib/chart/line'
+import 'echarts/lib/chart/bar'
+import 'echarts/lib/component/tooltip'
+import 'echarts/lib/component/legend'
+
+// 将echarts挂载到原型上
+Vue.prototype.$echarts = ECharts
 
 // 将自定义的vuex store挂载到原型上
 Vue.prototype.$store = Store
