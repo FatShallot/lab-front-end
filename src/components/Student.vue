@@ -10,10 +10,7 @@
       <!-- 查询输入框 -->
 
       <el-form :inline="true">
-        <el-form-item>
-          <div>姓名</div>
-        </el-form-item>
-        <el-form-item>
+        <el-form-item label="姓名">
           <el-input v-model="queryInfo.realName" clearable @clear="getStudents">
             <!-- slot="append"应该是表示将按钮跟输入框结合在一起，是固定写法 -->
             <el-button

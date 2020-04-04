@@ -9,10 +9,7 @@
     <el-card>
       <!-- 查询输入框 -->
       <el-form :inline="true">
-        <el-form-item>
-          <div>姓名</div>
-        </el-form-item>
-        <el-form-item>
+        <el-form-item label="姓名">
           <el-input v-model="queryInfo.realName" clearable @clear="getUsers">
             <!-- slot="append"应该是表示将按钮跟输入框结合在一起，是固定写法 -->
             <el-button
@@ -32,7 +29,7 @@
 
       <!-- 用户表格 -->
       <!-- 增加height属性自动实现固定表头 -->
-      <el-table :data="users" border style="width: 100%" stripe height="380">
+      <el-table :data="users" border style="width: 100%;" stripe height="380">
         <el-table-column type="index"></el-table-column>
         <el-table-column prop="username" label="账号"> </el-table-column>
         <el-table-column prop="realName" label="姓名"> </el-table-column>
@@ -91,7 +88,7 @@
           <el-input
             v-model="changeRoleForm.realName"
             disabled
-            style="width:100%"
+            style="width: 100%;"
           ></el-input>
         </el-form-item>
         <el-form-item label="角色">
@@ -99,7 +96,7 @@
           <el-select
             v-model="changeRoleForm.roleId"
             placeholder="请选择用户角色"
-            style="width:100%"
+            style="width: 100%;"
           >
             <el-option
               v-for="item in roles"
@@ -134,7 +131,7 @@
           <!-- 加了style之后，form里的input和select宽度就一致了 -->
           <el-input
             v-model="addUserForm.username"
-            style="width:100%"
+            style="width: 100%;"
             oninput="value=value.replace(/[^\d]/g,'')"
           ></el-input>
         </el-form-item>
@@ -142,7 +139,7 @@
           <!-- 加了style之后，form里的input和select宽度就一致了 -->
           <el-input
             v-model="addUserForm.realName"
-            style="width:100%"
+            style="width: 100%;"
           ></el-input>
         </el-form-item>
         <el-form-item label="角色" prop="roleId">
@@ -150,7 +147,7 @@
           <el-select
             v-model="addUserForm.roleId"
             placeholder="请选择用户角色"
-            style="width:100%"
+            style="width: 100%;"
           >
             <el-option
               v-for="item in roles"
@@ -320,7 +317,7 @@ export default {
     },
     // 添加用户
     addUser() {
-      this.$refs.addUserFormRef.validate(async valid => {
+      this.$refs.addUserFormRef.validate(async (valid) => {
         if (valid) {
           const response = await this.$request.postWithBody(
             'user',
