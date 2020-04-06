@@ -30,6 +30,8 @@
           :collapse="isCollapse"
           :collapse-transition="false"
           router
+          :default-active="activeMenu"
+          unique-opened
         >
           <!-- 一级菜单 -->
           <!-- 循环 -->
@@ -53,6 +55,7 @@
               v-for="childItem in item.childMenus"
               :key="childItem.id"
               :index="'/' + childItem.path"
+              @click="saveActiveMenu('/' + childItem.path)"
             >
               <!-- 模板 -->
               <template slot="title">
@@ -84,12 +87,16 @@ export default {
       // 侧边栏是否折叠，默认不折叠
       isCollapse: false,
       // 用户真实姓名
-      userRealName: ''
+      userRealName: '',
+      // 保存当前点击的菜单项
+      activeMenu: ''
     }
   },
   created() {
     this.getMenus()
     this.getUserRealName()
+    // 将保存在本地的激活菜单项取出并赋值
+    this.activeMenu = window.sessionStorage.getItem('activeMenu')
   },
   methods: {
     logout() {
@@ -117,11 +124,17 @@ export default {
         this.logout()
       }
     },
+    // 获取用户的真实姓名
     async getUserRealName() {
       const response = await this.$request.get('user/real_name')
       if (response.successful) {
         this.userRealName = response.data
       }
+    },
+    // 保存当前点击的菜单项
+    saveActiveMenu(activeMenu) {
+      window.sessionStorage.setItem('activeMenu', activeMenu)
+      this.activeMenu = activeMenu
     }
   }
 }

@@ -146,7 +146,6 @@ export default {
         for (let i = 0; i < this.status.length; i++) {
           this.status[i].type = 'bar'
           this.status[i].stack = '状态'
-          // this.status[i].data = this.status[i].data / 3600
           for (let j = 0; j < this.status[i].data.length; j++) {
             this.status[i].data[j] = this.status[i].data[j] / 3600
           }

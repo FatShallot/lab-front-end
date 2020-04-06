@@ -29,7 +29,7 @@
 
       <!-- 用户表格 -->
       <!-- 增加height属性自动实现固定表头 -->
-      <el-table :data="users" border style="width: 100%;" stripe height="380">
+      <el-table :data="users" border style="width: 100%;" stripe>
         <el-table-column type="index"></el-table-column>
         <el-table-column prop="username" label="账号"> </el-table-column>
         <el-table-column prop="realName" label="姓名"> </el-table-column>
@@ -346,5 +346,6 @@ export default {
 }
 .el-table {
   margin-bottom: 10px;
+  height: 360px;
 }
 </style>
