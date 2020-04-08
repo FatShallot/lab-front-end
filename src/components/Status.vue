@@ -51,7 +51,7 @@ export default {
             // 通过方法来操作提示信息的改进失败了，暂时放弃
             let msg = `${data[0].name}`
             // marker表示一段html，是这个状态的图例
-            data.forEach((item) => {
+            data.forEach(item => {
               // 将小数表示的小时转化为时分秒
               const duration =
                 Math.trunc(item.data) +
@@ -115,10 +115,6 @@ export default {
   created() {
     this.init()
   },
-  mounted() {
-    // 官网要求在其他dom加载完成才能开始初始化图表
-    // this.initBarChart()
-  },
   methods: {
     // 初始化
     init() {
@@ -155,7 +151,7 @@ export default {
           }
         }
         // 图例
-        this.option.legend.data = this.status.map((item) => item.name)
+        this.option.legend.data = this.status.map(item => item.name)
         // x轴坐标
         this.option.xAxis[0].data = this.status[1].data.map((item, index) => {
           return index + 1 + '日'

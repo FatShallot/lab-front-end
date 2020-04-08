@@ -72,7 +72,9 @@
       <!-- 主体，组件都放在这里显示 -->
       <el-main>
         <!-- 路由占位符 -->
-        <router-view></router-view>
+        <navigation>
+          <router-view></router-view>
+        </navigation>
       </el-main>
     </el-container>
   </el-container>
@@ -106,7 +108,7 @@ export default {
     },
     async getMenus() {
       // 这种写法将返回值里的data属性取出来，并命名为menus
-      const response = await this.$request.get('/menus')
+      const response = await this.$request.get('menus')
       if (response.successful) {
         this.menus = response.data
       }

@@ -16,6 +16,10 @@ import 'echarts/lib/chart/line'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/legend'
+// 导入vue-navigation实现后退不刷新
+import Navigation from 'vue-navigation'
+
+Vue.use(Navigation, { router })
 
 // 将echarts挂载到原型上
 Vue.prototype.$echarts = ECharts

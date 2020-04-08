@@ -52,3 +52,7 @@
 # 用户账户界面
 
 ![User.png](http://ww1.sinaimg.cn/large/005IGVTXly1gdaklamtasj31hc0smq5i.jpg)
+
+## 学生按月状态统计界面
+
+![学生按月状态统计.png](http://ww1.sinaimg.cn/large/005IGVTXly1gdfhb6mp2dj31hc0sm412.jpg)
