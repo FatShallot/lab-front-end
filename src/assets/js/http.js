@@ -1,7 +1,10 @@
 import Vue from 'vue'
 // 导入axios
 import axios from 'axios'
-// import qs from 'qs'
+
+// 导入加载进度条nprogerss
+import Nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 // 设置请求的根路径，就是后台路径
 // 这里最后加了一个/，调用的时候，直接写login，而不用写/login
@@ -9,6 +12,8 @@ axios.defaults.baseURL = 'http://localhost:10010/'
 
 // 请求拦截器
 axios.interceptors.request.use(request => {
+  // 显示进度条
+  Nprogress.start()
   request.headers.Authorization = window.sessionStorage.getItem('jwt')
   return request
 })
@@ -18,6 +23,9 @@ axios.interceptors.request.use(request => {
 // 异常消息：error里有response
 axios.interceptors.response.use(
   response => {
+    // 隐藏进度条
+    Nprogress.done()
+
     // 正常状态
     if (response.data.successful) {
       // 如果响应里携带了token，就将这个token保存到要向后传递的数据中

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 页头 -->
-    <el-page-header @back="goBack" content="状态统计"> </el-page-header>
+    <el-page-header @back="goBack" content="状态统计"></el-page-header>
 
     <el-card>
       <!-- 姓名 + 月份选择器 -->

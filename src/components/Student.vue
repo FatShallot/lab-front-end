@@ -13,12 +13,7 @@
         <el-form-item label="姓名">
           <el-input v-model="queryInfo.realName" clearable @clear="getStudents">
             <!-- slot="append"应该是表示将按钮跟输入框结合在一起，是固定写法 -->
-            <el-button
-              slot="append"
-              icon="el-icon-search"
-              @click="getStudents"
-              placeholder="请输入内容"
-            ></el-button>
+            <el-button slot="append" icon="el-icon-search" @click="getStudents" placeholder="请输入内容"></el-button>
           </el-input>
         </el-form-item>
       </el-form>
@@ -27,27 +22,19 @@
       <!-- 增加height属性自动实现固定表头 -->
       <el-table :data="students" border stripe>
         <el-table-column type="index"></el-table-column>
-        <el-table-column prop="username" label="账号"> </el-table-column>
-        <el-table-column prop="realName" label="姓名"> </el-table-column>
+        <el-table-column prop="username" label="账号"></el-table-column>
+        <el-table-column prop="realName" label="姓名"></el-table-column>
         <el-table-column prop="status" label="状态">
           <template slot-scope="scope">
             <el-tag
               :type="getTagTypaByStatus(scope.row.statusId)"
               disable-transitions
-              >{{ scope.row.status }}</el-tag
-            >
+            >{{ scope.row.status }}</el-tag>
           </template>
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button
-              type="primary"
-              plain
-              size="mini"
-              @click="toStatus(scope.row)"
-            >
-              统计信息
-            </el-button>
+            <el-button type="primary" plain size="mini" @click="toStatus(scope.row)">统计信息</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -61,8 +48,7 @@
         :page-size="queryInfo.pageSize"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
-      >
-      </el-pagination>
+      ></el-pagination>
     </el-card>
   </div>
 </template>

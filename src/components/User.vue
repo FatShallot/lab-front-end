@@ -12,18 +12,11 @@
         <el-form-item label="姓名">
           <el-input v-model="queryInfo.realName" clearable @clear="getUsers">
             <!-- slot="append"应该是表示将按钮跟输入框结合在一起，是固定写法 -->
-            <el-button
-              slot="append"
-              icon="el-icon-search"
-              @click="getUsers"
-              placeholder="请输入内容"
-            ></el-button>
+            <el-button slot="append" icon="el-icon-search" @click="getUsers" placeholder="请输入内容"></el-button>
           </el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" plain @click="showAddUserDialog">
-            添加用户
-          </el-button>
+          <el-button type="primary" plain @click="showAddUserDialog">添加用户</el-button>
         </el-form-item>
       </el-form>
 
@@ -31,8 +24,8 @@
       <!-- 增加height属性自动实现固定表头 -->
       <el-table :data="users" border style="width: 100%;" stripe>
         <el-table-column type="index"></el-table-column>
-        <el-table-column prop="username" label="账号"> </el-table-column>
-        <el-table-column prop="realName" label="姓名"> </el-table-column>
+        <el-table-column prop="username" label="账号"></el-table-column>
+        <el-table-column prop="realName" label="姓名"></el-table-column>
         <el-table-column prop="role" label="角色"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
@@ -41,23 +34,14 @@
               plain
               size="mini"
               @click="showChangeRoleDialog(scope.row)"
-            >
-              更改角色
-            </el-button>
+            >更改角色</el-button>
             <el-button
               size="mini"
               type="warning"
               plain
               @click="resetPassword(scope.row.username)"
-              >重置密码</el-button
-            >
-            <el-button
-              size="mini"
-              type="warning"
-              plain
-              @click="deleteUser(scope.row)"
-              >删除</el-button
-            >
+            >重置密码</el-button>
+            <el-button size="mini" type="warning" plain @click="deleteUser(scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -71,8 +55,7 @@
         :page-size="queryInfo.pageSize"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
-      >
-      </el-pagination>
+      ></el-pagination>
     </el-card>
 
     <!-- 修改用户角色的对话框 -->
@@ -85,25 +68,12 @@
       <el-form :model="changeRoleForm" :label-width="formLabelWidth">
         <el-form-item label="姓名">
           <!-- 加了style之后，form里的input和select宽度就一致了 -->
-          <el-input
-            v-model="changeRoleForm.realName"
-            disabled
-            style="width: 100%;"
-          ></el-input>
+          <el-input v-model="changeRoleForm.realName" disabled style="width: 100%;"></el-input>
         </el-form-item>
         <el-form-item label="角色">
           <!-- 表示选中的值 -->
-          <el-select
-            v-model="changeRoleForm.roleId"
-            placeholder="请选择用户角色"
-            style="width: 100%;"
-          >
-            <el-option
-              v-for="item in roles"
-              :key="item.id"
-              :label="item.description"
-              :value="item.id"
-            ></el-option>
+          <el-select v-model="changeRoleForm.role" placeholder="请选择用户角色" style="width: 100%;">
+            <el-option v-for="item in roles" :key="item" :label="item" :value="item"></el-option>
           </el-select>
         </el-form-item>
       </el-form>
@@ -137,24 +107,12 @@
         </el-form-item>
         <el-form-item label="姓名" prop="realName">
           <!-- 加了style之后，form里的input和select宽度就一致了 -->
-          <el-input
-            v-model="addUserForm.realName"
-            style="width: 100%;"
-          ></el-input>
+          <el-input v-model="addUserForm.realName" style="width: 100%;"></el-input>
         </el-form-item>
-        <el-form-item label="角色" prop="roleId">
+        <el-form-item label="角色" prop="role">
           <!-- 表示选中的值 -->
-          <el-select
-            v-model="addUserForm.roleId"
-            placeholder="请选择用户角色"
-            style="width: 100%;"
-          >
-            <el-option
-              v-for="item in roles"
-              :key="item.id"
-              :label="item.description"
-              :value="item.id"
-            ></el-option>
+          <el-select v-model="addUserForm.role" placeholder="请选择用户角色" style="width: 100%;">
+            <el-option v-for="item in roles" :key="item" :label="item" :value="item"></el-option>
           </el-select>
         </el-form-item>
       </el-form>
@@ -188,7 +146,7 @@ export default {
       changeRoleForm: {
         username: '',
         realName: '',
-        roleId: ''
+        role: ''
       },
       // form里各元素标签的宽度
       formLabelWidth: '20%',
@@ -198,7 +156,7 @@ export default {
       addUserForm: {
         username: '',
         realName: '',
-        roleId: ''
+        role: ''
       },
       // 添加用户对话框表单的校验规则
       addUserFormRules: {
@@ -208,7 +166,7 @@ export default {
         ],
         realName: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
         // 这个地方居然一定要跟字段命名得一样。如果用role，在选了选项以后也会又错误提示
-        roleId: [{ required: true, message: '请选择角色', trigger: 'change' }]
+        role: [{ required: true, message: '请选择角色', trigger: 'change' }]
       }
     }
   },
@@ -221,8 +179,8 @@ export default {
     async getUsers() {
       const reponse = await this.$request.get('users', this.queryInfo)
       if (reponse.successful) {
-        // 后台使用了分页插件，所以数据封装在了reponse.data.list里
-        this.users = reponse.data.list
+        // 后台使用了分页插件，所以数据封装在了reponse.data.records
+        this.users = reponse.data.records
         this.total = reponse.data.total
       }
     },
@@ -307,7 +265,7 @@ export default {
     showChangeRoleDialog(user) {
       this.isChangeRoleDialogVisable = true
       // 每次打开对话框都将当前的角色赋值上去
-      this.changeRoleForm.roleId = user.roleId
+      this.changeRoleForm.role = user.role
       this.changeRoleForm.realName = user.realName
       this.changeRoleForm.username = user.username
     },
@@ -317,7 +275,7 @@ export default {
     },
     // 添加用户
     addUser() {
-      this.$refs.addUserFormRef.validate(async (valid) => {
+      this.$refs.addUserFormRef.validate(async valid => {
         if (valid) {
           const response = await this.$request.postWithBody(
             'user',

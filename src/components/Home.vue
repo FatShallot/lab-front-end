@@ -8,8 +8,8 @@
       <el-dropdown @command="handleCommand">
         <span class="el-dropdown-link">
           用户：{{ userRealName }}
-          <i class="el-icon-arrow-down el-icon--right"></i
-        ></span>
+          <i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="password">修改密码</el-dropdown-item>
           <el-dropdown-item command="logout">退出登录</el-dropdown-item>
@@ -36,12 +36,7 @@
           <!-- 一级菜单 -->
           <!-- 循环 -->
           <!-- index要求绑定字符串 -->
-          <el-submenu
-            v-for="item in menus"
-            :key="item.id"
-            :index="item.id + ''"
-            unique-opened
-          >
+          <el-submenu v-for="item in menus" :key="item.id" :index="item.id + ''" unique-opened>
             <!-- 一级菜单的模板 -->
             <template slot="title">
               <!-- 图标 -->
