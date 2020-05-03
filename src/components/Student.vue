@@ -90,7 +90,7 @@ export default {
       const reponse = await this.$request.get('students', this.queryInfo)
       if (reponse.successful) {
         // 后台使用了分页插件，所以数据封装在了reponse.data.list里
-        this.students = reponse.data.list
+        this.students = reponse.data.records
         this.total = reponse.data.total
       }
     },

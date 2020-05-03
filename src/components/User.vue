@@ -165,7 +165,7 @@ export default {
           { min: 3, max: 13, message: '长度在 3 到 13 个字符', trigger: 'blur' }
         ],
         realName: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
-        // 这个地方居然一定要跟字段命名得一样。如果用role，在选了选项以后也会又错误提示
+        // 这个地方居然一定要跟字段命名得一样。如果用role，在选了选项以后也会有错误提示
         role: [{ required: true, message: '请选择角色', trigger: 'change' }]
       }
     }

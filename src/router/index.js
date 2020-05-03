@@ -9,6 +9,8 @@ import Password from '../components/Password.vue'
 import User from '../components/User.vue'
 import Student from '../components/Student.vue'
 import Status from '../components/Status.vue'
+import LeaveApplication from '../components/LeaveApplication.vue'
+import CheckLeaveApplication from '../components/CheckLeaveApplication.vue'
 
 Vue.use(VueRouter)
 
@@ -46,6 +48,14 @@ const routes = [
       {
         path: '/status',
         component: Status
+      },
+      {
+        path: '/leave_applications',
+        component: LeaveApplication
+      },
+      {
+        path: '/check_leave_applications',
+        component: CheckLeaveApplication
       }
     ]
   }
