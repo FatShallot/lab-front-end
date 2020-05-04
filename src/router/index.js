@@ -8,7 +8,7 @@ import Welcome from '../components/Welcome.vue'
 import Password from '../components/Password.vue'
 import User from '../components/User.vue'
 import Student from '../components/Student.vue'
-import Status from '../components/Status.vue'
+import State from '../components/State.vue'
 import LeaveApplication from '../components/LeaveApplication.vue'
 import CheckLeaveApplication from '../components/CheckLeaveApplication.vue'
 
@@ -46,8 +46,8 @@ const routes = [
         component: Student
       },
       {
-        path: '/status',
-        component: Status
+        path: '/state',
+        component: State
       },
       {
         path: '/leave_applications',

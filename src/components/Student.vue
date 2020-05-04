@@ -24,17 +24,17 @@
         <el-table-column type="index"></el-table-column>
         <el-table-column prop="username" label="账号"></el-table-column>
         <el-table-column prop="realName" label="姓名"></el-table-column>
-        <el-table-column prop="status" label="状态">
+        <el-table-column prop="state" label="状态">
           <template slot-scope="scope">
             <el-tag
-              :type="getTagTypaByStatus(scope.row.statusId)"
+              :type="getTagTypaByState(scope.row.state)"
               disable-transitions
-            >{{ scope.row.status }}</el-tag>
+            >{{ scope.row.state }}</el-tag>
           </template>
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button type="primary" plain size="mini" @click="toStatus(scope.row)">统计信息</el-button>
+            <el-button type="primary" plain size="mini" @click="toState(scope.row)">统计信息</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -105,32 +105,32 @@ export default {
       this.getStudents()
     },
     // 通过用户的状态渲染标签
-    getTagTypaByStatus(statusId) {
-      switch (statusId) {
+    getTagTypaByState(state) {
+      switch (state) {
         // 学习-绿色
         // 休息-橙色
         // 请假-灰色
         // 上课-蓝色
         // 打工-灰色
-        case 1:
+        case '学习':
           return 'success'
-        case 2:
+        case '休息':
           return 'warning'
-        case 3:
+        case '放假':
           return 'info'
-        case 4:
+        case '上课':
           return ''
-        case 5:
+        case '打工':
           return 'info'
       }
     },
     // 跳转到状态统计页面
-    toStatus(student) {
+    toState(student) {
       this.$store.commit('updateStudent', {
         username: student.username,
         realName: student.realName
       })
-      this.$router.push('/status')
+      this.$router.push('/state')
     }
   }
 }
